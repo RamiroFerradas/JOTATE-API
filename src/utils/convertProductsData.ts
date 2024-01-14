@@ -1,6 +1,8 @@
-import { Product } from "../models/product";
+import { ProductAttributes } from "../models/product";
 
-export const convertProductsData = (productsData: any[]): Product[] => {
+export const convertProductsData = (
+  productsData: any[]
+): ProductAttributes[] => {
   return productsData.map(({ stock, consults, price, ...productData }) => ({
     ...productData,
     stock: parseInt(stock) || 0,
