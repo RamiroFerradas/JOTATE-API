@@ -7,3 +7,5 @@ sequelize.sync({ alter: true }).then(() => {
     console.log(`Server listening at port: ${PORT}`);
   });
 });
+
+//
