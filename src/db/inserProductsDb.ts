@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 // Configura las variables de entorno
 dotenv.config();
 
-const { DB_URL, DB_URL_LOCAL } = process.env;
+const { DB_URL } = process.env;
 
 // Define la función para insertar los productos
 export const insertProducts = async () => {
@@ -23,6 +23,7 @@ export const insertProducts = async () => {
       previousProducts as ProductAttributes[],
       fetchedProducts as ProductAttributes[]
     );
+
     console.log(
       `Se encontraron ${productsData.length} productos en la Google Shets`
     );
@@ -71,8 +72,9 @@ export const insertProducts = async () => {
 
 // Convierte los datos de los productos
 const convertProductsData = (productsData: any[]): ProductAttributes[] => {
-  return productsData.map(({ stock, price, ...productData }) => ({
+  return productsData.map(({ destacado, stock, price, ...productData }) => ({
     ...productData,
+    destacado: Boolean(destacado),
     stock: parseInt(stock) || 0,
     price: parseFloat(price),
   }));
@@ -82,16 +84,17 @@ const convertProductsData = (productsData: any[]): ProductAttributes[] => {
 
 async function getAllProducts(): Promise<ProductAttributes[]> {
   try {
-    const response = await fetch(DB_URL_LOCAL as string);
+    const response = await fetch(DB_URL as string);
     const blob = await response.blob();
     const text = await new Response(blob).text();
-
+    console.log(response);
     const products: ProductAttributes[] = await new Promise(
       (resolve, reject) => {
         Papa.parse(text, {
           header: true,
           complete: (results: Papa.ParseResult<ProductAttributes>) => {
             const parsedProducts: ProductAttributes[] = results.data;
+            console.log(parsedProducts);
             // Solo traer productos que tengan "name"
             const filteredProducts: ProductAttributes[] = parsedProducts.filter(
               (product) => product.name && product.id
@@ -173,6 +176,10 @@ const compareProducts = (
           fetchedProduct.stock !== matchingProduct.stock
             ? fetchedProduct.stock
             : matchingProduct.stock,
+        destacado:
+          fetchedProduct.destacado !== matchingProduct.destacado
+            ? fetchedProduct.destacado
+            : matchingProduct.destacado,
       };
 
       // Verifica si alguna propiedad ha cambiado
@@ -184,7 +191,8 @@ const compareProducts = (
         modifiedProduct.description !== matchingProduct.description ||
         modifiedProduct.image !== matchingProduct.image ||
         modifiedProduct.price !== matchingProduct.price ||
-        modifiedProduct.stock !== matchingProduct.stock;
+        modifiedProduct.stock !== matchingProduct.stock ||
+        modifiedProduct.destacado !== matchingProduct.destacado;
 
       if (hasChanges) {
         modifiedProducts.push(modifiedProduct);

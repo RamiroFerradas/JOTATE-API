@@ -13,6 +13,7 @@ interface ProductAttributes {
   price: number;
   stock: number;
   consults?: number;
+  destacado: boolean;
 }
 
 interface ProductInstance extends Model<ProductAttributes>, ProductAttributes {}
@@ -60,6 +61,11 @@ const Product = sequelize.define<ProductInstance>(
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0,
+    },
+    destacado: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
   },
   {
