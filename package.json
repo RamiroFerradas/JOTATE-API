@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "nodemon -L",
+    "dev": "nodemon -L",
+    "start": "node ./dist/index.js",
     "test": "mocha -w ./tests/**/*.spec.js"
   },
   "author": "Ramiro",
