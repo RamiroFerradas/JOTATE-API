@@ -30,7 +30,6 @@ router.get("/:id", (req: Request, res: Response) => {
 router.put("/:id", (req: Request, res: Response) => {
   const { id } = req.params;
   const updatedData = req.body;
-  console.log(id, "route");
   updateProduct(id, updatedData)
     .then((product: any) => {
       if (product) {

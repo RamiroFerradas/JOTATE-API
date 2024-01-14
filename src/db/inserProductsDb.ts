@@ -87,14 +87,12 @@ async function getAllProducts(): Promise<ProductAttributes[]> {
     const response = await fetch(DB_URL as string);
     const blob = await response.blob();
     const text = await new Response(blob).text();
-    console.log(response);
     const products: ProductAttributes[] = await new Promise(
       (resolve, reject) => {
         Papa.parse(text, {
           header: true,
           complete: (results: Papa.ParseResult<ProductAttributes>) => {
             const parsedProducts: ProductAttributes[] = results.data;
-            console.log(parsedProducts);
             // Solo traer productos que tengan "name"
             const filteredProducts: ProductAttributes[] = parsedProducts.filter(
               (product) => product.name && product.id
