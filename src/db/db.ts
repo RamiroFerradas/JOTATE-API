@@ -4,12 +4,13 @@ import { insertProducts } from "./inserProductsDb";
 
 dotenv.config();
 
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, ELEPHANT_URL } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, ELEPHANT_URL, DATABASE_URL } =
+  process.env;
 
 const OLD_URL = `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`;
 const NEW_URL = `${ELEPHANT_URL}`;
 
-const sequelize = new Sequelize(NEW_URL, {
+const sequelize = new Sequelize(`${DATABASE_URL}`, {
   logging: false,
   native: false,
 });

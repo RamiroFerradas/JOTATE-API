@@ -65,8 +65,8 @@ export const insertProducts = async () => {
     console.log(
       `Se encontraron ${updatedsProducts.length} productos en la base de datos`
     );
-  } catch (error) {
-    console.error("Error al insertar los productos:", error);
+  } catch (error: any) {
+    console.error("Error al insertar los productos:", error.message);
   }
 };
 
