@@ -17,6 +17,6 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
 
 module.exports = authMiddleware;
 
-router.use("/products", productsRoute);
+router.use("/products", authMiddleware, productsRoute);
 
 module.exports = router;
