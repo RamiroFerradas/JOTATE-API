@@ -9,13 +9,12 @@ const { AUTH_TOKEN } = process.env;
 
 const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
-  const { AUTH_TOKEN } = process.env;
 
-  if (!authorization || authorization !== `Bearer ${AUTH_TOKEN}`) {
+  if (!authorization || authorization !== `${AUTH_TOKEN}`) {
     return res.status(401).json({
       error: "Unauthorized",
       authorization: authorization || "Token no proporcionado",
-      expectedToken: `Bearer ${AUTH_TOKEN}`,
+      expectedToken: AUTH_TOKEN,
     });
   }
 
