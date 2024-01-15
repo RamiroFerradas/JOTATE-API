@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "dev": "ts-node-dev index.ts",
+    "dev": "ts-node-dev api/index.ts",
     "build": "tsc",
-    "start": "ts-node index.ts",
+    "start": "ts-node api/index.ts",
     "test": "mocha -w ./tests/**/*.spec.js",
     "vercel-build": "echo hello"
   },
