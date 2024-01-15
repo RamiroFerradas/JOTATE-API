@@ -10,7 +10,16 @@ const { AUTH_TOKEN } = process.env;
 const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
   if (!authorization || authorization !== AUTH_TOKEN) {
-    return res.status(401).json({ error: "Unauthorized" });
+    return res.status(401).json({
+      error:
+        "Unauthorized" +
+        ", " +
+        "authorization: " +
+        authorization +
+        ", " +
+        "TOKEN: " +
+        AUTH_TOKEN,
+    });
   }
   next();
 };
