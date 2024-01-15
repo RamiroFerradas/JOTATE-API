@@ -1,11 +1,23 @@
 import { Product, ProductAttributes } from "../models/product";
 
 const ERROR = `Error @ controller/productsController --> `;
+let cachedProducts: ProductAttributes[] | null = null;
 
 const getAllProducts = async () => {
   try {
+    // Verifica si los productos ya están en la caché
+    if (cachedProducts) {
+      console.log("Obteniendo productos desde la caché...");
+      return cachedProducts;
+    }
+
+    // Si no hay productos en la caché, realiza la consulta a la base de datos
     const products = await Product.findAll();
+
     if (products.length) {
+      // Actualiza la caché con los nuevos productos
+      cachedProducts = products;
+
       return products;
     } else {
       return "No se encontraron productos";
