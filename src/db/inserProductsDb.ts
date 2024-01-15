@@ -76,7 +76,7 @@ const convertProductsData = (productsData: any[]): ProductAttributes[] => {
     ...productData,
     destacado: Boolean(destacado),
     stock: parseInt(stock) || 0,
-    price: parseFloat(price),
+    price: parseFloat(price) ?? 0,
   }));
 };
 
@@ -139,7 +139,7 @@ const compareProducts = (
     );
 
     if (matchingProduct) {
-      const modifiedProduct: any = {
+      const modifiedProduct: ProductAttributes = {
         id: fetchedProduct.id,
         name:
           fetchedProduct.name !== matchingProduct.name
