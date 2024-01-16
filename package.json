@@ -2,7 +2,7 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "api/index.ts",
   "scripts": {
     "dev": "ts-node-dev api/index.ts",
     "start": "ts-node api/index.ts",
