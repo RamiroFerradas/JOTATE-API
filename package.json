@@ -5,9 +5,11 @@
   "main": "index.ts",
   "scripts": {
     "dev": "ts-node-dev api/index.ts",
+    "start": "ts-node src/index.ts",
     "build": "tsc",
-    "start": "ts-node api/index.ts",
-    "test": "mocha -w ./tests/**/*.spec.js",
+    "lint": "eslint --fix src test",
+    "test": "jest",
+    "typecheck": "tsc --noEmit",
     "vercel-build": "echo hello"
   },
   "author": "Ramiro",

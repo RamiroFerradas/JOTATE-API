@@ -1,7 +1,4 @@
 import express, { Request, Response, NextFunction } from "express";
-import cookieParser from "cookie-parser";
-import bodyParser from "body-parser";
-import morgan from "morgan";
 
 const router = require("./routes/router");
 
